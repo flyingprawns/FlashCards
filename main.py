@@ -5,6 +5,8 @@ CARD_BACK_IMAGE_PATH = "./images/card_back.png"
 RIGHT_BUTTON_IMAGE_PATH = "./images/right.png"
 WRONG_BUTTON_IMAGE_PATH = "./images/wrong.png"
 BACKGROUND_COLOR = "#B1DDC6"
+FLASHCARD_CATEGORY_FONT = ("Arial", 40, "italic")
+FLASHCARD_CONTENT_FONT = ("Arial", 60, "bold")
 
 # --------------------- GUI INTERFACE -------------------------#
 # GUI Window
@@ -17,6 +19,8 @@ window.config(padx=50, pady=50, background=BACKGROUND_COLOR)
 flashcard = tkinter.Canvas(width=800, height=540, highlightthickness=0, background=BACKGROUND_COLOR)
 flashcard_front_image = tkinter.PhotoImage(file=CARD_FRONT_IMAGE_PATH)
 flashcard.create_image(400, 270, image=flashcard_front_image, anchor=tkinter.CENTER)
+flashcard_category_text = flashcard.create_text(400, 150, text="category", font=FLASHCARD_CATEGORY_FONT)
+flashcard_content_text = flashcard.create_text(400, 270, text="content", font=FLASHCARD_CONTENT_FONT)
 flashcard.grid(row=1, column=1, columnspan=2, pady=10)
 
 # "Wrong" button
