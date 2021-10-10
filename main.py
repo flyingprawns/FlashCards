@@ -4,8 +4,8 @@ import random
 
 CARD_FRONT_IMAGE_PATH = "./images/card_front.png"
 CARD_BACK_IMAGE_PATH = "./images/card_back.png"
-RIGHT_BUTTON_IMAGE_PATH = "./images/right.png"
-WRONG_BUTTON_IMAGE_PATH = "./images/wrong.png"
+NEXT_BUTTON_IMAGE_PATH = "./images/next.png"
+FLIP_BUTTON_IMAGE_PATH = "./images/flip.png"
 BACKGROUND_COLOR = "#B1DDC6"
 FLASHCARD_CATEGORY_FONT = ("Arial", 40, "italic")
 FLASHCARD_CONTENT_FONT = ("Arial", 60, "bold")
@@ -101,14 +101,14 @@ flashcard_category_text = flashcard.create_text(400, 150, text="Instructions:", 
 flashcard_content_text = flashcard.create_text(400, 270, text="Press a button!", font=FLASHCARD_CONTENT_FONT)
 flashcard.grid(row=1, column=1, columnspan=2, pady=10)
 
-# "Wrong" button
-wrong_button_image = tkinter.PhotoImage(file=WRONG_BUTTON_IMAGE_PATH)
+# "Flip" button
+wrong_button_image = tkinter.PhotoImage(file=FLIP_BUTTON_IMAGE_PATH)
 wrong_button = tkinter.Button(image=wrong_button_image, highlightthickness=0, bd=0, anchor=tkinter.CENTER,
                               command=flip_card_button)
 wrong_button.grid(row=2, column=1, pady=7)
 
-# "Right" button
-right_button_image = tkinter.PhotoImage(file=RIGHT_BUTTON_IMAGE_PATH)
+# "Next" button
+right_button_image = tkinter.PhotoImage(file=NEXT_BUTTON_IMAGE_PATH)
 right_button = tkinter.Button(image=right_button_image, highlightthickness=0, bd=0, anchor=tkinter.CENTER,
                               command=next_card_button)
 right_button.grid(row=2, column=2, pady=7)
