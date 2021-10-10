@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import messagebox
 import pandas
 import random
 
@@ -21,8 +22,8 @@ flashcard_list = flashcard_data.to_dict(orient="records")
 # -------------------- FLASHCARD FUNCTIONALITY --------------- #
 category_name_front = 'French'
 category_name_back = 'English'
-current_flashcard = {}
-current_side = "NONE"
+current_flashcard = None
+current_side = None
 
 
 def display_current_flashcard():
@@ -74,22 +75,36 @@ def flip_current_card():
 
 # --------------------- GUI BUTTONS ---------------------------#
 def next_card_button():
-    select_random_flashcard()
-    display_current_flashcard()
-    return
+    if len(flashcard_list) == 0:
+        # Reset flashcard status
+        global current_flashcard
+        global current_side
+        current_flashcard = None
+        current_side = None
+        # Tell user they have finished studying
+        messagebox.showinfo(title="Congratulations!", message="You've studied all the cards.")
+        return
+    else:
+        select_random_flashcard()
+        display_current_flashcard()
+        flashcard_list.remove(current_flashcard)
+        return
 
 
 def flip_card_button():
-    flip_current_card()
-    display_current_flashcard()
-    return
+    if current_flashcard is None:
+        return
+    else:
+        flip_current_card()
+        display_current_flashcard()
+        return
 
 
 # --------------------- GUI INTERFACE -------------------------#
 # GUI Window
 window = tkinter.Tk()
 window.title("Flashcards")
-window.minsize(width=800, height=500)
+window.minsize(width=900, height=770)
 window.config(padx=50, pady=50, background=BACKGROUND_COLOR)
 
 # Flashcard
@@ -97,8 +112,8 @@ front_image = tkinter.PhotoImage(file=CARD_FRONT_IMAGE_PATH)
 back_image = tkinter.PhotoImage(file=CARD_BACK_IMAGE_PATH)
 flashcard = tkinter.Canvas(width=800, height=540, highlightthickness=0, background=BACKGROUND_COLOR)
 flashcard_image = flashcard.create_image(400, 270, anchor=tkinter.CENTER, image=front_image)
-flashcard_category_text = flashcard.create_text(400, 150, text="Instructions:", font=FLASHCARD_CATEGORY_FONT)
-flashcard_content_text = flashcard.create_text(400, 270, text="Press a button!", font=FLASHCARD_CONTENT_FONT)
+flashcard_category_text = flashcard.create_text(400, 150, text="Buttons:", font=FLASHCARD_CATEGORY_FONT)
+flashcard_content_text = flashcard.create_text(400, 270, text="\n\n\n Flip          Next", font=FLASHCARD_CONTENT_FONT)
 flashcard.grid(row=1, column=1, columnspan=2, pady=10)
 
 # "Flip" button
